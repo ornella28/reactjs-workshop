@@ -1,16 +1,25 @@
 import { ChevronDown } from 'lucide-react'
 import ProductCard from './ProductCard'
 import Pagination from './Pagination'
-import { products } from '../data/products'
+import type { Product } from '../types/product'
 
-function ProductSection() {
+type ProductSectionProps = {
+    products: Product[]
+}
+
+function ProductSection({ products }: ProductSectionProps) {
     return (
         <section className="lg:col-span-9">
             <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50/50 p-5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:shadow-xl">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <h1 className="text-xl font-bold tracking-tight text-slate-900">
-                        Recommended for you
-                    </h1>
+                    <div>
+                        <h1 className="text-xl font-bold tracking-tight text-slate-900">
+                            Recommended for you
+                        </h1>
+                        <p className="mt-1 text-sm text-slate-500">
+                            {products.length} product{products.length !== 1 ? 's' : ''} found
+                        </p>
+                    </div>
 
                     <label className="inline-flex items-center gap-2 text-sm text-slate-600">
                         <span className="hidden sm:inline">Sort by:</span>
@@ -32,11 +41,17 @@ function ProductSection() {
 
                 <div className="mt-5 h-px bg-slate-100" />
 
-                <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {products.map((product) => (
-                        <ProductCard key={product.id} product={product} />
-                    ))}
-                </div>
+                {products.length === 0 ? (
+                    <div className="mt-6 rounded-xl bg-white p-8 text-center text-slate-500">
+                        No products match your search.
+                    </div>
+                ) : (
+                    <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {products.map((product) => (
+                            <ProductCard key={product.id} product={product} />
+                        ))}
+                    </div>
+                )}
 
                 <Pagination />
             </div>
