@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Header from './components/Header'
 import SidebarFilters from './components/SidebarFilters'
 import ProductSection from './components/ProductSection'
@@ -20,6 +20,13 @@ function App() {
 
             return matchesSearch && matchesCategory
         })
+
+    useEffect(() => {
+        const count = filteredProducts.length
+        document.title = count > 0
+            ? `LITE.SHOP (${count})`
+            : 'LITE.SHOP (No results)'
+    }, [filteredProducts])
 
 
     return (
