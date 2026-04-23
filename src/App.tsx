@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import Header from './components/Header'
 import SidebarFilters from './components/SidebarFilters'
 import ProductSection from './components/ProductSection'
@@ -8,7 +8,7 @@ import { products } from './data/products'
 
 function App() {
     const [searchTerm, setSearchTerm] = useState('')
-    const [selectedCategory, setSelectedCategory] = useState('All')// useState is used to store the search text and selected category so the UI can update when the user interact with it
+    const [selectedCategory, setSelectedCategory] = useState('all')// useState is used to store the search text and selected category so the UI can update when the user interact with it
 
     const filteredProducts = products.filter((product) => {
         const matchesSearch = product.title
@@ -16,7 +16,7 @@ function App() {
             .includes(searchTerm.toLowerCase())
 
             const matchesCategory =
-                selectedCategory === 'All' || product.category === selectedCategory
+                selectedCategory === 'all' || product.category === selectedCategory
 
             return matchesSearch && matchesCategory
         })

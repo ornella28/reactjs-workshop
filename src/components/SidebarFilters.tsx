@@ -1,6 +1,14 @@
 import { ChevronDown } from 'lucide-react'
 
-function SidebarFilters() {
+type SidebarFiltersProps = {
+    selectedCategory: string
+    onCategoryChange: (category: string) => void
+}
+
+function SidebarFilters({
+                            selectedCategory,
+                            onCategoryChange,
+                        }: SidebarFiltersProps) {
     return (
         <aside className="self-start lg:sticky lg:top-20 lg:col-span-3">
             <div className="rounded-[1.25rem] border border-slate-200 bg-slate-50/50 p-5 shadow-sm backdrop-blur-sm transition-all duration-300 hover:border-blue-400 hover:shadow-xl">
@@ -21,8 +29,10 @@ function SidebarFilters() {
                     <div className="space-y-3">
                         <label className="flex cursor-pointer select-none items-center gap-3">
                             <input
-                                type="checkbox"
-                                defaultChecked
+                                type="radio"
+                                name="category"
+                                checked={selectedCategory === 'all'}
+                                onChange={() => onCategoryChange('all')}
                                 className="h-[1.125rem] w-[1.125rem] cursor-pointer rounded-[0.375rem] border border-slate-200 accent-blue-600"
                             />
                             <span className="flex-1 text-sm text-slate-700">
@@ -32,7 +42,10 @@ function SidebarFilters() {
 
                         <label className="flex cursor-pointer select-none items-center gap-3">
                             <input
-                                type="checkbox"
+                                type="radio"
+                                name="category"
+                                checked={selectedCategory === 'Outerwear'}
+                                onChange={() => onCategoryChange('Outerwear')}
                                 className="h-[1.125rem] w-[1.125rem] cursor-pointer rounded-[0.375rem] border border-slate-200 accent-blue-600"
                             />
                             <span className="flex-1 text-sm font-medium text-slate-700">
@@ -42,7 +55,10 @@ function SidebarFilters() {
 
                         <label className="flex cursor-pointer select-none items-center gap-3">
                             <input
-                                type="checkbox"
+                                type="radio"
+                                name="category"
+                                checked={selectedCategory === 'Footwear'}
+                                onChange={() => onCategoryChange('Footwear')}
                                 className="h-[1.125rem] w-[1.125rem] cursor-pointer rounded-[0.375rem] border border-slate-200 accent-blue-600"
                             />
                             <span className="flex-1 text-sm font-medium text-slate-700">
@@ -52,7 +68,10 @@ function SidebarFilters() {
 
                         <label className="flex cursor-pointer select-none items-center gap-3">
                             <input
-                                type="checkbox"
+                                type="radio"
+                                name="category"
+                                checked={selectedCategory === 'Accessories'}
+                                onChange={() => onCategoryChange('Accessories')}
                                 className="h-[1.125rem] w-[1.125rem] cursor-pointer rounded-[0.375rem] border border-slate-200 accent-blue-600"
                             />
                             <span className="flex-1 text-sm font-medium text-slate-700">
