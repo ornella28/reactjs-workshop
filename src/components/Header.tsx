@@ -1,4 +1,6 @@
 import { Menu, Package, Search, ShoppingBag, User } from 'lucide-react'
+import { useContext } from 'react'
+import { ThemeContext } from '../context/ThemeContext'
 
 type HeaderProps = {
     searchTerm: string
@@ -6,6 +8,11 @@ type HeaderProps = {
 }
 
 function Header({ searchTerm, onSearchChange }: HeaderProps) {
+
+    const themeContext = useContext(ThemeContext)
+    if (!themeContext) return null
+
+    const { toggleTheme } = themeContext
     return (
         <header className="sticky top-0 z-40 border-b border-blue-700/30 bg-blue-600 shadow-lg shadow-blue-900/10">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -33,6 +40,9 @@ function Header({ searchTerm, onSearchChange }: HeaderProps) {
                     </nav>
 
                     <div className="flex items-center gap-2">
+                        <button onClick={toggleTheme}>
+                            Toggle Theme
+                        </button>
                         <div className="mr-4 hidden items-center gap-2 rounded-full border border-blue-400/20 bg-blue-500/30 px-3 py-1 lg:flex">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-blue-200 opacity-75" />
